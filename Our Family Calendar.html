@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Family Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6ec;--card:#fff;--ink:#3b2417;--mut:#8a6a58;--b:#e8590c;--a:#c2255c;--line:#f3dcc8;--g1:#ffd8a8;--g2:#ffc9de;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1410;--card:#2a1d17;--ink:#fbeadb;--mut:#c4a58f;--b:#ffa94d;--a:#ff8fb8;--line:#4a3528;--g1:#5a3418;--g2:#59243b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1410;--card:#2a1d17;--ink:#fbeadb;--mut:#c4a58f;--b:#ffa94d;--a:#ff8fb8;--line:#4a3528;--g1:#5a3418;--g2:#59243b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Poppins,system-ui,sans-serif}
+header{text-align:center;padding:48px 20px 28px;background:linear-gradient(135deg,var(--g1),var(--g2))}
+h1{font:700 clamp(2rem,7vw,3.4rem)/1.1 Fraunces,Georgia,serif;margin:0 0 8px}
+header p{margin:0;color:var(--mut)}
+.next{max-width:520px;margin:22px auto 0;background:var(--card);border-radius:20px;padding:16px 20px;box-shadow:0 8px 24px #0002}
+.next small{color:var(--mut);letter-spacing:.08em;text-transform:uppercase;font-size:.7rem}
+.next b{display:block;font:700 1.4rem Fraunces,Georgia,serif;margin:2px 0}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 56px}
+.bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+button{font:500 .9rem Poppins,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer}
+button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.m{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px}
+.m.cur{outline:2px solid var(--b)}
+.m h2{font:700 1.3rem Fraunces,Georgia,serif;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+.m h2 span{font:400 .75rem Poppins;color:var(--mut)}
+.e{display:flex;gap:12px;align-items:center;padding:8px 0;border-top:1px dashed var(--line)}
+.d{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font:700 1.05rem Fraunces,Georgia,serif;color:#fff;background:var(--b)}
+.e.a .d{background:var(--a)}
+.e.today{background:linear-gradient(90deg,var(--g1),transparent);border-radius:12px;padding-left:6px}
+.t{line-height:1.25}.t i{display:block;font-style:normal;font-size:.72rem;color:var(--mut)}
+.none{color:var(--mut);font-size:.9rem;padding:8px 0}
+footer{text-align:center;color:var(--mut);font-size:.85rem;padding-bottom:32px}
+</style>
+</head>
+<body>
+<header>
+<h1>🎂 Our Family Calendar 💍</h1>
+<p>Every birthday &amp; anniversary, all year round</p>
+<div class="next" id="next"></div>
+</header>
+<main>
+<div class="bar" id="bar">
+<button class="on" data-f="all">All</button><button data-f="b">🎂 Birthdays</button><button data-f="a">💍 Anniversaries</button>
+</div>
+<div class="grid" id="grid"></div>
+</main>
+<footer>Made with love for the family ❤️</footer>
+<script>
+var M=["January","February","March","April","May","June","July","August","September","October","November","December"];
+// [month, day, name, type] b=birthday a=anniversary s=special
+var D=[
+[1,15,"Kiran","b"],
+[2,4,"Chote Mama","a"],[2,6,"Yogesh & Chachi","a"],[2,7,"Versha Bua","a"],[2,7,"Saksham","b"],[2,17,"Dada & Daadi","a"],[2,22,"Khushi Didi","b"],
+[4,22,"Pihuuu","b"],[4,30,"Badee Mama","a"],
+[5,12,"Pranjal","b"],[5,16,"Kiran Bua","a"],[5,17,"Nanaa & Nani","a"],
+[6,2,"Yogesh","b"],[6,11,"Didi, Papa & Sanskar","b"],[6,30,"Kushuuu aur Meraaa","s"],
+[7,12,"Bhupendra","b"],[7,13,"Dadi","b"],[7,15,"Bade Fufaji","b"],[7,22,"Choti Mama","b"],
+[8,4,"Pranjal ke Papa","b"],
+[9,24,"Gauri","b"],[9,25,"Chote Mama","b"],[9,25,"Dadi","b"],[9,27,"Baddi Buaa","b"],
+[10,3,"Mummyyy","b"],[10,7,"Srishti","b"],[10,8,"Badda Asshuu","b"],[10,11,"Naanaa Jii","b"],[10,15,"Chachi","b"],[10,15,"Shashwat","b"],
+[11,2,"Chotii Buaa","b"],[11,13,"Ashwin","b"],[11,17,"Mummy & Papaa","b"],
+[12,2,"Baddi Buaa","a"],[12,15,"Badee Mama","b"],[12,22,"Ishaa","b"]
+];
+var L={b:"Birthday 🎂",a:"Anniversary 💍",s:"Special day 💖"};
+var now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+function nextDate(e){var d=new Date(today.getFullYear(),e[0]-1,e[1]);if(d<today)d=new Date(today.getFullYear()+1,e[0]-1,e[1]);return d}
+function days(e){return Math.round((nextDate(e)-today)/864e5)}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function render(f){
+ var h="";
+ for(var m=1;m<=12;m++){
+  var es=D.filter(function(e){return e[0]==m&&(f=="all"||e[3]==f||(f=="b"&&e[3]=="s"))});
+  var all=D.filter(function(e){return e[0]==m});
+  h+='<section class="m'+(m==now.getMonth()+1?' cur':'')+'"><h2>'+M[m-1]+'<span>'+all.length+' date'+(all.length==1?'':'s')+'</span></h2>';
+  if(!es.length)h+='<div class="none">'+(all.length?'Nothing here for this filter':'No dates yet ✨')+'</div>';
+  es.forEach(function(e){
+   var t=days(e)==0;
+   h+='<div class="e '+(e[3]=="b"?"b":"a")+(t?" today":"")+'"><div class="d">'+e[1]+'</div><div class="t">'+esc(e[2])+'<i>'+L[e[3]]+(t?' · Today! 🎉':'')+'</i></div></div>';
+  });
+  h+='</section>';
+ }
+ document.getElementById("grid").innerHTML=h;
+}
+var s=D.slice().sort(function(a,b){return days(a)-days(b)}),n=s[0],k=days(n);
+var same=s.filter(function(e){return days(e)==k});
+document.getElementById("next").innerHTML='<small>'+(k==0?'Happening today':'Coming up next')+'</small><b>'+same.map(function(e){return esc(e[2])}).join(" + ")+'</b>'+L[n[3]]+' · '+(k==0?'🎉 Celebrate!':k==1?'tomorrow':'in '+k+' days')+' ('+M[n[0]-1]+' '+n[1]+')';
+document.getElementById("bar").onclick=function(ev){var f=ev.target.dataset.f;if(!f)return;[].forEach.call(this.children,function(b){b.className=b.dataset.f==f?"on":""});render(f)};
+render("all");
+</script>
+</body>
+</html>
