@@ -124,70 +124,6 @@
     @media (max-width:760px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .month-index { grid-template-columns:repeat(6,minmax(0,1fr)); } }
     @media (max-width:650px) { .hero { padding-top:82px; } main { padding:27px 16px 56px; } .section-intro { display:block; } .section-intro p:last-child { margin-top:7px; } .toolbar { align-items:stretch; padding:10px; } .filters { width:100%; gap:4px; } .filter { padding-inline:11px; } .today-button { align-self:flex-start; } }
     @media (max-width:440px) { .grid { grid-template-columns:minmax(0,1fr); } .month-index { grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; } .month-link { font-size:.75rem; } .month { padding:18px; } }
-    /* Calm, system-native layout refinement */
-    :root { --bg:#f5f5f7; --surface:#fff; --ink:#1d1d1f; --muted:#6e6e73; --line:#e6e6eb; --accent:#0071e3; --accent-2:#5856d6; --tint:#eef5fc; --shadow:0 2px 12px #00000008; --radius:18px; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif; color-scheme:light; }
-    @media (prefers-color-scheme:dark) { :root:not([data-theme="light"]) { --bg:#000; --surface:#1c1c1e; --ink:#f5f5f7; --muted:#98989d; --line:#38383a; --accent:#2997ff; --accent-2:#bf5af2; --tint:#182633; --shadow:0 2px 12px #0004; color-scheme:dark; } }
-    :root[data-theme="dark"] { --bg:#000; --surface:#1c1c1e; --ink:#f5f5f7; --muted:#98989d; --line:#38383a; --accent:#2997ff; --accent-2:#bf5af2; --tint:#182633; --shadow:0 2px 12px #0004; color-scheme:dark; }
-    :root[data-theme="light"] { color-scheme:light; }
-    body { line-height:1.45; letter-spacing:-.01em; }
-    .hero { padding:72px 24px 34px; text-align:left; background:var(--bg); }
-    .hero::after { display:none; }
-    .hero-inner { max-width:1240px; }
-    .eyebrow { color:var(--muted); font-size:.75rem; font-weight:600; letter-spacing:.01em; text-transform:none; }
-    h1,h2,h3 { font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif; }
-    h1 { max-width:760px; font-size:clamp(2.7rem,6.5vw,4.6rem); font-weight:700; line-height:1.02; letter-spacing:-.055em; }
-    h1 span { font-size:.54em; vertical-align:12%; }
-    .intro { margin-top:13px; font-size:1.1rem; }
-    .top-actions { top:24px; right:max(24px,calc((100vw - 1240px)/2)); }
-    .icon-button { border-color:var(--line); box-shadow:none; }
-    .next { max-width:100%; margin:30px 0 0; padding:22px 24px; border:1px solid var(--line); border-radius:16px; box-shadow:none; }
-    .next::before { top:18px; bottom:18px; background:var(--accent); }
-    .next-label { color:var(--muted); letter-spacing:.01em; font-size:.75rem; text-transform:none; }
-    .next-title { margin-top:5px; font-family:inherit; font-size:1.35rem; font-weight:650; letter-spacing:-.025em; }
-    .next-detail { margin-top:3px; font-size:.9rem; }
-    main { max-width:1288px; padding:30px 24px 72px; }
-    .section-intro { margin:0 0 20px; align-items:center; }
-    .section-intro .eyebrow { margin-bottom:5px; }
-    .section-intro h2 { font-family:inherit; font-size:1.8rem; font-weight:650; letter-spacing:-.035em; }
-    .section-intro p:last-child { max-width:340px; }
-    .month-index { grid-template-columns:repeat(12,minmax(0,1fr)); gap:4px; margin-bottom:16px; padding:6px; border:0; border-radius:13px; background:#eaeaed; }
-    :root[data-theme="dark"] .month-index { background:#242426; }
-    @media (prefers-color-scheme:dark) { :root:not([data-theme="light"]) .month-index { background:#242426; } }
-    .month-link { min-height:34px; border-radius:9px; font-size:.75rem; font-weight:600; }
-    .month-link:hover { border-color:transparent; background:#f7f7f8; }
-    .month-link[aria-current="location"] { border-color:transparent; background:var(--surface); color:var(--accent); box-shadow:0 1px 3px #00000012; }
-    .toolbar { display:flex; justify-content:flex-start; gap:10px; margin:0 0 18px; padding:0; border:0; background:none; }
-    .filters { flex:1; gap:6px; }
-    .filter { min-height:38px; padding:7px 13px; border:1px solid transparent; border-radius:10px; color:var(--muted); font-size:.84rem; }
-    .filter:hover { background:#eaeaed; }
-    .filter[aria-pressed="true"] { border-color:transparent; background:var(--ink); color:var(--bg); }
-    .search-wrap { display:flex; align-items:center; gap:8px; width:min(260px,100%); min-height:38px; padding:0 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface); color:var(--muted); }
-    .search-icon { font-size:1.2rem; line-height:1; }
-    .search-wrap input { min-width:0; width:100%; border:0; outline:0; background:transparent; color:var(--ink); font:inherit; font-size:.83rem; }
-    .search-wrap input::placeholder { color:var(--muted); }
-    .search-wrap:focus-within { border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent); }
-    .today-button { min-height:38px; padding:7px 13px; border:1px solid var(--line); border-radius:10px; background:var(--surface); font-size:.84rem; }
-    .today-button:hover { border-color:var(--accent); }
-    .grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
-    .month { padding:18px 20px; border-color:var(--line); border-radius:16px; box-shadow:none; }
-    .month:hover { transform:translateY(-1px); box-shadow:0 5px 18px #00000008; }
-    .month.current { border-color:color-mix(in srgb,var(--accent) 46%,var(--line)); box-shadow:inset 0 2px 0 var(--accent); }
-    .month-heading { margin-bottom:10px; font-family:inherit; font-size:1.15rem; font-weight:650; letter-spacing:-.025em; }
-    .month-heading::before { font-size:.64rem; }
-    .count { font-size:.72rem; }
-    .event { grid-template-columns:36px minmax(0,1fr); gap:11px; min-height:54px; border-color:var(--line); }
-    .event.is-today { background:var(--tint); }
-    .date { width:34px; height:34px; border-radius:10px; background:#eaf3fc; color:var(--accent); font-family:inherit; font-size:.84rem; font-weight:650; }
-    .event.anniversary .date { background:#f2ebfb; color:var(--accent-2); }
-    .event.special .date { background:#edf3e7; color:#49732d; }
-    .event-name { font-size:.88rem; font-weight:600; letter-spacing:-.015em; }
-    .event-meta { font-size:.72rem; }
-    .today-tag { color:var(--accent); }
-    .empty { font-size:.84rem; }
-    footer { padding:22px 20px max(28px,env(safe-area-inset-bottom)); border-top:1px solid var(--line); }
-    @media (max-width:980px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .month-index { grid-template-columns:repeat(6,minmax(0,1fr)); } }
-    @media (max-width:650px) { .hero { padding:74px 20px 28px; } .top-actions { top:16px; right:16px; } main { padding:24px 16px 56px; } .section-intro { display:block; } .section-intro p:last-child { margin-top:7px; } .toolbar { align-items:stretch; flex-wrap:wrap; } .filters { width:100%; overflow-x:auto; flex-wrap:nowrap; padding-bottom:3px; } .filter { white-space:nowrap; } .search-wrap { flex:1; width:auto; } .today-button { flex:none; } }
-    @media (max-width:460px) { h1 { font-size:2.65rem; } .intro { max-width:290px; font-size:1rem; } .grid { grid-template-columns:minmax(0,1fr); } .month-index { grid-template-columns:repeat(4,minmax(0,1fr)); } .month-link { font-size:.78rem; } .next { padding:20px 20px 20px 22px; } }
   </style>
 </head>
 <body>
@@ -195,7 +131,7 @@
     <div class="top-actions"><button class="icon-button" id="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"><span aria-hidden="true">◐</span></button></div>
     <div class="hero-inner">
       <p class="eyebrow">A year full of reasons to celebrate</p>
-      <h1>Our Family Calendar <span aria-hidden="true">🎂</span></h1>
+      <h1>Our Family Calendar</h1>
       <p class="intro">Birthdays, anniversaries, and all our special days.</p>
       <section class="next" id="next-event" aria-live="polite" aria-atomic="true"></section>
     </div>
@@ -203,7 +139,7 @@
   <main>
     <section class="section-intro" aria-labelledby="year-title">
       <div><p class="eyebrow">Keep close to the moments</p><h2 id="year-title">The year, together</h2></div>
-      <p>Little dates that make a big year. Find a celebration and make it yours.</p>
+     
     </section>
     <nav class="month-index" id="month-index" aria-label="Jump to a month"></nav>
     <div class="toolbar">
@@ -213,8 +149,7 @@
         <button class="filter" type="button" data-filter="a" aria-pressed="false">💍 Anniversaries</button>
         <button class="filter" type="button" data-filter="s" aria-pressed="false">💖 Special days</button>
       </div>
-      <label class="search-wrap"><span class="sr-only">Search family dates</span><span class="search-icon" aria-hidden="true">⌕</span><input id="event-search" type="search" placeholder="Find a person or date" autocomplete="off"></label>
-      <button class="today-button" id="jump-today" type="button">Today <span aria-hidden="true">↗</span></button>
+      <button class="today-button" id="jump-today" type="button">Jump to this month ↓</button>
     </div>
     <p id="filter-status" class="sr-only" aria-live="polite"></p>
     <div class="grid" id="calendar" aria-label="Family dates by month"></div>
@@ -256,19 +191,12 @@
       card.replaceChildren(label,title,detail);
     }
 
-    let activeFilter = "all";
-    let searchQuery = "";
-    function render(filter = activeFilter) {
-      activeFilter = filter;
+    function render(filter = "all") {
       const fragment = document.createDocumentFragment();
       months.forEach((monthName, index) => {
         const month = index + 1;
         const all = events.filter(event => event[0] === month);
-        const visible = all.filter(event => {
-          const matchesFilter = filter === "all" || event[3] === filter;
-          const haystack = `${event[2]} ${labels[event[3]]} ${monthName} ${event[1]}`.toLocaleLowerCase();
-          return matchesFilter && haystack.includes(searchQuery);
-        });
+        const visible = all.filter(event => filter === "all" || event[3] === filter);
         const section = document.createElement("section");
         section.className = `month${month === currentMonth ? " current" : ""}`;
         section.id = `month-${month}`;
@@ -330,10 +258,6 @@
       if (!button) return;
       document.querySelectorAll(".filter").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
       render(button.dataset.filter);
-    });
-    document.getElementById("event-search").addEventListener("input", event => {
-      searchQuery = event.target.value.trim().toLocaleLowerCase();
-      render();
     });
     document.getElementById("jump-today").addEventListener("click", () => document.getElementById(`month-${currentMonth}`).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
     const themeButton = document.getElementById("theme-toggle");
